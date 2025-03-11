@@ -38,7 +38,7 @@ A simple Python script to convert Markdown files to Kindle-compatible format and
 ## Usage
 
 ```
-python md2kindle.py path/to/markdown_file.md
+bash md2kindle.sh path/to/markdown_file.md
 ```
 
 Additional options:
@@ -50,7 +50,7 @@ Additional options:
 ## Notes
 
 - Ensure your sending email is added to the approved list in your Amazon Kindle settings.
-- For Gmail, you'll need to use an App Password instead of your regular password.
+- For Gmail, you'll need to use an App Password instead of your regular password. You can visit [Gmail App Passwords](https://myaccount.google.com/apppasswords) to generate one.
 - Kindle now primarily supports EPUB format, but the script can be configured to use other formats.
 
 ## License

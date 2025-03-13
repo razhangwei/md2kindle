@@ -45,13 +45,38 @@ Additional options:
 - `--title "Your Book Title"` - Set a custom title (defaults to filename)
 - `--author "Author Name"` - Set author name
 - `--cover path/to/cover.jpg` - Add a cover image
+- `--format epub|pdf` - Output format (default: epub)
+- `--pdf-engine pdflatex|xelatex|lualatex|wkhtmltopdf` - PDF engine to use
+- `--no-formatting-fix` - Skip Markdown formatting improvements for bullet points
 - `--no-send` - Convert only, don't send via email
 
 ## Notes
 
 - Ensure your sending email is added to the approved list in your Amazon Kindle settings.
 - For Gmail, you'll need to use an App Password instead of your regular password. You can visit [Gmail App Passwords](https://myaccount.google.com/apppasswords) to generate one.
-- Kindle now primarily supports EPUB format, but the script can be configured to use other formats.
+- Kindle now primarily supports EPUB format, but the script can be configured to use PDF as well.
+- The script automatically improves Markdown formatting for better rendering of bullet points and lists on Kindle.
+
+### Markdown Formatting Tips
+
+For best results with Kindle conversion:
+
+1. Leave blank lines before and after lists
+2. Use indented bullet points under numbered lists (see `test_bullets.md` for examples)
+3. Add empty lines between bullet points for better spacing
+
+Example of good formatting:
+```markdown
+### Primary Factors
+
+1. **Work Stress**
+   - Factor one
+   - Factor two
+
+2. **Environment**
+   - Factor one
+   - Factor two
+```
 
 ## License
 

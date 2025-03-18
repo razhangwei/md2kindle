@@ -19,10 +19,8 @@ def parse_arguments():
     parser.add_argument('--title', help='Book title (defaults to filename)')
     parser.add_argument('--author', help='Author name')
     parser.add_argument('--cover', help='Path to cover image')
-    parser.add_argument('--format', choices=['epub', 'pdf'], default='epub', 
+    parser.add_argument('--format', choices=['epub'], default='epub', 
                         help='Output format (default: epub)')
-    parser.add_argument('--pdf-engine', choices=['pdflatex', 'xelatex', 'lualatex', 'wkhtmltopdf'], 
-                        default='pdflatex', help='PDF engine to use when format is pdf')
     parser.add_argument('--no-send', action='store_true', help='Convert only, don\'t send via email')
     parser.add_argument('--output', help='Output file path (defaults to input file with new extension)')
     parser.add_argument('--no-formatting-fix', action='store_true', 
@@ -37,15 +35,6 @@ def check_dependencies(args):
         print("Error: Pandoc is not installed or not in PATH.")
         print("Please install Pandoc: https://pandoc.org/installing.html")
         sys.exit(1)
-    
-    # If PDF format is requested, check for pdflatex
-    if args.format == 'pdf':
-        try:
-            subprocess.run([args.pdf_engine, '--version'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
-        except (subprocess.SubprocessError, FileNotFoundError):
-            print(f"Warning: {args.pdf_engine} is not installed or not in PATH.")
-            print("PDF conversion may fail. Please install TeX Live or MiKTeX.")
-            print("Alternatively, use --format epub for reliable conversion.")
 
 def preprocess_markdown(input_file, improved_formatting=True):
     """Preprocess markdown file to improve formatting for Kindle conversion."""
@@ -117,10 +106,6 @@ def convert_markdown(args):
         with open(css_file, 'w', encoding='utf-8') as f:
             f.write(css_content)
         cmd.extend(['--css', str(css_file)])
-    
-    # For PDF format, add the PDF engine option
-    if args.format == 'pdf':
-        cmd.extend(['--pdf-engine', args.pdf_engine])
     
     # Add additional options for better list rendering
     cmd.extend(['--wrap=none', '--toc'])

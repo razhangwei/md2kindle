@@ -54,7 +54,7 @@ Additional options:
 - Ensure your sending email is added to the approved list in your Amazon Kindle settings.
 - For Gmail, you'll need to use an App Password instead of your regular password. You can visit [Gmail App Passwords](https://myaccount.google.com/apppasswords) to generate one.
 - Kindle supports EPUB format for optimal reading experience.
-- The script automatically improves Markdown formatting for better rendering of bullet points and lists on Kindle.
+- The script automatically improves Markdown formatting for better rendering of bullet points and lists on Kindle with compact spacing.
 
 ### Markdown Formatting Tips
 

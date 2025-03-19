@@ -44,17 +44,17 @@ def preprocess_markdown(input_file, improved_formatting=True):
     if not improved_formatting:
         return content
     
-    # Normalize bullet lists (ensure there's a blank line before and after lists)
+    # Normalize bullet lists with compact formatting
     import re
     
-    # Add blank lines before bullet lists if missing
+    # Add blank lines before bullet lists if missing (list start)
     content = re.sub(r'([^\n])\n(- )', r'\1\n\n\2', content)
     
-    # Add blank lines after bullet lists if missing
+    # Add blank lines after bullet lists if missing (list end)
     content = re.sub(r'(- [^\n]+)\n([^-\n])', r'\1\n\n\2', content)
     
-    # Ensure good spacing for bullet points
-    content = re.sub(r'\n- ', r'\n\n- ', content)
+    # Remove any extra blank lines between bullet points to make lists compact
+    content = re.sub(r'(- [^\n]+)\n\n(- )', r'\1\n\2', content)
     
     # Create temp file with processed content
     temp_file = Path(tempfile.gettempdir()) / f"processed_{Path(input_file).name}"
@@ -94,13 +94,17 @@ def convert_markdown(args):
     if args.cover and os.path.exists(args.cover):
         cmd.extend(['--epub-cover-image', args.cover])
     
-    # Add CSS for better bullet point rendering in EPUB
+    # Add CSS for better bullet point rendering in EPUB with compact spacing
     if args.format == 'epub':
         css_content = """
         body { margin: 5%; text-align: justify; }
-        ul { margin-left: 1em; margin-bottom: 1em; }
-        li { margin-bottom: 0.5em; }
-        li ul { margin-top: 0.5em; }
+        ul { margin-left: 1em; margin-bottom: 0.3em; margin-top: 0.3em; }
+        li { margin: 0; padding: 0; line-height: 1.2; }
+        li + li { margin-top: 0; }
+        li ul, li ol { margin-top: 0; margin-bottom: 0; }
+        ol { margin-left: 1em; margin-bottom: 0.3em; margin-top: 0.3em; }
+        ol li { margin: 0; padding: 0; }
+        p { margin-top: 0.5em; margin-bottom: 0.5em; }
         """
         css_file = Path(tempfile.gettempdir()) / "kindle_style.css"
         with open(css_file, 'w', encoding='utf-8') as f:

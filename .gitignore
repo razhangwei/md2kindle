@@ -32,6 +32,7 @@ env/
 .env
 
 # Generated files
+outputs/
 *.epub
 *.mobi
 *.pdf

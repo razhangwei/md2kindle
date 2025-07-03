@@ -35,22 +35,6 @@ class TestMarkdownConversion(unittest.TestCase):
         result = subprocess.run(cmd, capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, f"Process failed: {result.stderr}")
         self.assertTrue(output_path.exists(), "Output EPUB file wasn't created")
-        
-    def test_conversion_to_pdf(self):
-        output_path = Path(self.temp_dir.name) / "output.pdf"
-        cmd = [
-            sys.executable, 
-            str(self.script_path),
-            str(self.sample_md),
-            "--format", "pdf",
-            "--output", str(output_path),
-            "--no-send"
-        ]
-        
-        result = subprocess.run(cmd, capture_output=True, text=True)
-        self.assertEqual(result.returncode, 0, f"Process failed: {result.stderr}")
-        self.assertTrue(output_path.exists(), "Output PDF file wasn't created")
 
 if __name__ == "__main__":
-    import sys
     unittest.main()

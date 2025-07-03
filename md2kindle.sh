@@ -15,6 +15,11 @@ fi
 # Get the directory of this script
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# Check if virtual environment exists and activate it
+if [ -d "$SCRIPT_DIR/.venv" ]; then
+    source "$SCRIPT_DIR/.venv/bin/activate"
+fi
+
 # Check if .env file exists
 if [ ! -f "$SCRIPT_DIR/.env" ] && [ ! -f "$HOME/.md2kindle.env" ]; then
     echo "No .env file found. Creating one from template..."

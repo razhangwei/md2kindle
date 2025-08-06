@@ -54,7 +54,7 @@ Additional options:
 - Ensure your sending email is added to the approved list in your Amazon Kindle settings.
 - For Gmail, you'll need to use an App Password instead of your regular password. You can visit [Gmail App Passwords](https://myaccount.google.com/apppasswords) to generate one.
 - Kindle supports EPUB format for optimal reading experience.
-- The script automatically improves Markdown formatting for better rendering of bullet points and lists on Kindle with compact spacing.
+- The script automatically improves Markdown formatting by ensuring blank lines before and after lists and removing extra blank lines between bullet points for more compact Kindle rendering.
 
 ### Markdown Formatting Tips
 
@@ -62,7 +62,7 @@ For best results with Kindle conversion:
 
 1. Leave blank lines before and after lists
 2. Use indented bullet points under numbered lists (see `test_bullets.md` for examples)
-3. Add empty lines between bullet points for better spacing
+3. Avoid blank lines between bullet points; the script removes them for compact Kindle rendering, though blank lines before and after the list are still required
 
 Example of good formatting:
 ```markdown
